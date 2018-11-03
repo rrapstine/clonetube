@@ -1,7 +1,7 @@
 // Import React library
 import React, { Component } from 'react';
 
-// Create the search bar
+// Create the SearchBar component
 class SearchBar extends Component {
     constructor(props) {
         super(props);
@@ -24,4 +24,5 @@ class SearchBar extends Component {
     }
 }
 
+// Export SearchBar
 export default SearchBar;
