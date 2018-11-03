@@ -3,7 +3,11 @@ import React from 'react';
 
 // Create VideoListItem component
 const VideoListItem = (props) => {
-    return <li>Video</li>
+    const video = props.video;
+
+    return (
+        <li className="list-group-item">Video</li>
+    );
 };
 
 // Export VideoListItem
