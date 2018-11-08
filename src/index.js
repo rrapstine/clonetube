@@ -1,4 +1,5 @@
 // Import required libraries
+import _ from 'lodash';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import YTSearch from 'youtube-api-search';
@@ -20,22 +21,29 @@ class App extends Component {
             results: [],
             selectedVideo: null
         };
-        
-        YTSearch({ key: API_KEY, term: 'surfboards'}, (results) => this.setState({ results: results, selectedVideo: results[0] }));
+
+        this.videoSearch('react tutorial');
     }
 
-    performSearch(term) {
-
+    videoSearch(term) {
+        YTSearch({ key: API_KEY, term: term}, (results) => {
+            this.setState({ 
+                results: results, 
+                selectedVideo: results[0] 
+            });
+        });
     }
 
     render() {
+        const videoSearch = _.debounce((term) => {this.videoSearch(term)}, 300);
+
         return (
             <div>
-                <SearchBar />
-                <div class="row">
-                    <VideoDetail video={this.state.selectedVideo}/>
+                <SearchBar onSearchTermChange={videoSearch} />
+                <div className="row">
+                    <VideoDetail video={this.state.selectedVideo} />
                     <VideoList 
-                        onVideoSelect={selectedVideo => this.setState({selectedVideo})}
+                        onVideoSelect={(selectedVideo) => this.setState({selectedVideo})}
                         videos={this.state.results} />
                 </div>
             </div>
