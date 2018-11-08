@@ -10,7 +10,7 @@ const VideoListItem = (props) => {
     // console.log(video);
 
     return (
-        <li className="list-group-item">
+        <li className="list-group-item" onClick={() => props.onVideoSelect(video)}>
             <div className="video-info media">
                 <img src={imageURL} alt="" className="mr-3" />
 
